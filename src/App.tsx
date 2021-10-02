@@ -1,4 +1,4 @@
-import React, {useState, useCallback} from 'react';
+import React, {useState, useCallback, useMemo} from 'react';
 import './App.css';
 import {ChildArea} from './ChildArea'
 
@@ -29,6 +29,11 @@ const onChangeText = (e: any) => {
 const onClickClose = useCallback(() => {
   setOpen(false);
 }, []);
+
+// 計算は最初に読み込まれた時にだけ行われて、あとはずっと４のまま使いまわされる（使う機会はあまりない）
+// 処理の中に変数があれば、[]のなかにそれを設定し、その変数が変わった時だけ再計算するというやり方で工夫できる
+const tmp = useMemo(()=> 1+ 3, []);
+console.log(tmp)
 
   return (
     <div className="App">
