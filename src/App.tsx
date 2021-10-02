@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useCallback} from 'react';
 import './App.css';
 import {ChildArea} from './ChildArea'
 
@@ -14,6 +14,8 @@ setCount(count +1);
 
 }
 
+
+
 const onClickOpen = () =>{
 setOpen(!open);
 }
@@ -21,6 +23,12 @@ setOpen(!open);
 const onChangeText = (e: any) => {
   setText(e.target.value);
 }
+
+
+//　再レンダリングされたら上からアロー関数が再生成される
+const onClickClose = useCallback(() => {
+  setOpen(false);
+}, []);
 
   return (
     <div className="App">
@@ -34,7 +42,7 @@ const onChangeText = (e: any) => {
   <br />
   <button onClick={onClickOpen}> 表示</button>
 
-  <ChildArea  open={open} />
+  <ChildArea  open={open} onClickClose={onClickClose} />
       </header>
     </div>
   );
