@@ -1,6 +1,7 @@
 import React, {useState, useCallback, useMemo} from 'react';
 import './App.css';
 import {ChildArea} from './ChildArea'
+import { InlineStyle } from './components/InlineStyle';
 
 function App() {
    const [count,setCount] = useState(0);
@@ -38,6 +39,7 @@ console.log(tmp)
   return (
     <div className="App">
       <header className="App-header">
+        <InlineStyle />
   <p> {count}</p>
   <button onClick={onClickCountUp}>UP</button>
   {/* inputで子要素が再レンダリングされるのは、Reactの特徴 */}
