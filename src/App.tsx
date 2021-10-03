@@ -1,6 +1,7 @@
 import React, {useState, useCallback, useMemo} from 'react';
 import './App.css';
 import {ChildArea} from './ChildArea'
+import { CssModules } from './components/CssModules';
 import { InlineStyle } from './components/InlineStyle';
 
 function App() {
@@ -40,6 +41,7 @@ console.log(tmp)
     <div className="App">
       <header className="App-header">
         <InlineStyle />
+        <CssModules />
   <p> {count}</p>
   <button onClick={onClickCountUp}>UP</button>
   {/* inputで子要素が再レンダリングされるのは、Reactの特徴 */}

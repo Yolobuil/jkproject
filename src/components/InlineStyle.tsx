@@ -9,7 +9,7 @@ export const InlineStyle = () => {
     margin: "8px",
     // 横並び
     display: "flex",
-    justifyCOntent: "space-arround",
+    justifyContent: "space-arround",
     // あらいんアイテム
     alignItems: "center",
   }
@@ -20,7 +20,7 @@ color: "#3d84a8",
   const buttonStyle = {
 backgroundColor: "#abedd8",
 border:"none",
-paddding: "8px",
+padding: "8px",
 borderRadius: "8px",
 
   }
