@@ -5,6 +5,7 @@ import { CssModules } from './components/CssModules';
 import { InlineStyle } from './components/InlineStyle';
 import { StyledJsx } from './components/StyledJsx';
 import { StyledComponents } from './components/StyledComponents';
+import { Emotion } from './components/Emotion'
 
 function App() {
    const [count,setCount] = useState(0);
@@ -46,6 +47,7 @@ console.log(tmp)
         <CssModules />
         <StyledJsx />
         <StyledComponents />
+        <Emotion />
   <p> {count}</p>
   <button onClick={onClickCountUp}>UP</button>
   {/* inputで子要素が再レンダリングされるのは、Reactの特徴 */}
