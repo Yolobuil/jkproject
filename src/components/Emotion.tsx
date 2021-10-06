@@ -21,15 +21,13 @@ export const Emotion = () => {
   })
 
 const SButton = styled.button`
-   background-color: #abedd8;
-  border: none;
+  border: solid 2px #392eff;
+  border-radius: 20px;
   padding: 8px;
-  border-radius: 8px;
-  &:hover {
-    background-color: #46cdcf;
-    color: #fff;
-    cursor: pointer;
-  }
+  margin: 8px;
+  display: flex;
+  justify-content: space-arround;
+  align-items: center;
 `
 
 return(
