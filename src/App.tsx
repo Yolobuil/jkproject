@@ -13,6 +13,7 @@ import { BrowserRouter, Link, Switch , Route} from 'react-router-dom'
 import {Page1DetailA} from './Page1DetailA';
 import {Page1DetailB} from './Page1DetailB';
 import { Router } from './router/Router'
+import { UrlParameter } from './URLParameter';
 
 
 function App() {
@@ -52,7 +53,7 @@ console.log(tmp)
     <div className="App">
 
       <header className="App-header">
-        <Router />
+
         {/* react-routerのルーティング機能を機能させる */}
         <BrowserRouter>
         <Link to="/">Home</Link>
@@ -95,6 +96,7 @@ console.log(tmp)
   <button onClick={onClickOpen}> 表示</button>
 
   <ChildArea  open={open} onClickClose={onClickClose} />
+  {/* <UrlParameter /> */}
       </header>
     </div>
   );
