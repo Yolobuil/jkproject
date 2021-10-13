@@ -14,6 +14,7 @@ import {Page1DetailA} from './Page1DetailA';
 import {Page1DetailB} from './Page1DetailB';
 import { Router } from './router/Router'
 import { UrlParameter } from './URLParameter';
+import { Page404 } from './Page404';
 
 
 function App() {
@@ -61,7 +62,9 @@ console.log(tmp)
         <Link to="/page1">Page1</Link>
         <br/>
         <Link to="/page2">Page2</Link>
+
          <Switch>
+<Router />
 <Route exact path='/'><Home /></Route>
 <Route path='/page1' render={({ match : {url}}) => (
 

@@ -11,7 +11,7 @@ const query = new URLSearchParams(search);
     <h1>UrlParameterページです</h1>
     {/* <p>パラメータは{id}</p> */}
     {/* getでクエリを展開できる。queryパラメータの名称を設定すると、値が取得できる */}
-     <p>queryパラメータは{query.get('name')}</p>
+     <p>URLパラメータは{query.get('name')}</p>
     </>
   )
 }
