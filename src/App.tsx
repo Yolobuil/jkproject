@@ -15,6 +15,8 @@ import {Page1DetailB} from './Page1DetailB';
 import { Router } from './router/Router'
 import {PrimaryButton} from '../src/components/atoms/button/PrimaryButton'
 import {SecondaryButton} from '../src/components/atoms/button/SecondaryButton'
+import {SearchInput} from '../src/components/molecules/SearchInput'
+import {UserCard} from '../src/components/organisms/user/UserCard'
 
 
 function App() {
@@ -54,6 +56,8 @@ console.log(tmp)
     <div className="App">
 
       <header className="App-header">
+        <SearchInput />
+        <UserCard />
         <PrimaryButton children='Primary'></PrimaryButton>
         <PrimaryButton children='test'></PrimaryButton>
         <SecondaryButton children='secondary'></SecondaryButton>
