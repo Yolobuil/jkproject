@@ -52,12 +52,23 @@ const onClickClose = useCallback(() => {
 const tmp = useMemo(()=> 1+ 3, []);
 console.log(tmp)
 
+const user ={
+  name: 'yolo',
+  image: 'https://source.unsplash.com/yihlaRCCvd4',
+  email: 'aaa.co.jp',
+  phone:"090-1111-2222",
+  company:{
+    name: 'test株式会社'
+  },
+  website: "https:///google.com"
+}
+
   return (
     <div className="App">
 
       <header className="App-header">
         <SearchInput />
-        <UserCard />
+        <UserCard user={user}/>
         <PrimaryButton children='Primary'></PrimaryButton>
         <PrimaryButton children='test'></PrimaryButton>
         <SecondaryButton children='secondary'></SecondaryButton>
