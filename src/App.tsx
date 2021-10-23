@@ -17,6 +17,7 @@ import {PrimaryButton} from '../src/components/atoms/button/PrimaryButton'
 import {SecondaryButton} from '../src/components/atoms/button/SecondaryButton'
 import {SearchInput} from '../src/components/molecules/SearchInput'
 import {UserCard} from '../src/components/organisms/user/UserCard'
+import { DefaultLayout} from './components/templates/DefaultLayout'
 
 
 function App() {
@@ -52,6 +53,21 @@ const onClickClose = useCallback(() => {
 const tmp = useMemo(()=> 1+ 3, []);
 console.log(tmp)
 
+const users = [...Array(10).keys()].map(( val) => {
+return {
+  id: val,
+   name: `yolo${val}`,
+  image: 'https://source.unsplash.com/yihlaRCCvd4',
+  email: 'aaa.co.jp',
+  phone:"090-1111-2222",
+  company:{
+    name: 'test株式会社'
+  },
+  website: "https:///google.com"
+}
+
+})
+
 const user ={
   name: 'yolo',
   image: 'https://source.unsplash.com/yihlaRCCvd4',
@@ -64,24 +80,25 @@ const user ={
 }
 
   return (
-    <div className="App">
+//        <BrowserRouter>
+// <DefaultLayout>
 
       <header className="App-header">
-        <SearchInput />
+        {/* <SearchInput />
         <UserCard user={user}/>
         <PrimaryButton children='Primary'></PrimaryButton>
         <PrimaryButton children='test'></PrimaryButton>
-        <SecondaryButton children='secondary'></SecondaryButton>
+        <SecondaryButton children='secondary'></SecondaryButton> */}
         {/* react-routerのルーティング機能を機能させる */}
-        <BrowserRouter>
-        <Link to="/">Home</Link>
+<Router />
+        {/* <Link to="/">Home</Link>
         <br/>
         <Link to="/page1">Page1</Link>
         <br/>
         <Link to="/page2">Page2</Link>
 
          <Switch>
-<Router />
+
 <Route exact path='/'><Home /></Route>
 <Route path='/page1' render={({ match : {url}}) => (
 
@@ -100,25 +117,26 @@ const user ={
 )}/>
 <Route path='/page2'> <Page2 /></Route>
          </Switch>
-      </BrowserRouter>
+
         <InlineStyle />
         <CssModules />
         <StyledJsx />
         <StyledComponents />
-        <Emotion />
-  <p> {count}</p>
+        <Emotion /> */}
+  {/* <p> {count}</p>
   <button onClick={onClickCountUp}>UP</button>
-  {/* inputで子要素が再レンダリングされるのは、Reactの特徴 */}
+  inputで子要素が再レンダリングされるのは、Reactの特徴
   <input  value={text} onChange={onChangeText}/>
   {text}
   <br />
   <br />
   <button onClick={onClickOpen}> 表示</button>
 
-  <ChildArea  open={open} onClickClose={onClickClose} />
+  <ChildArea  open={open} onClickClose={onClickClose} /> */}
   {/* <UrlParameter /> */}
       </header>
-    </div>
+// </DefaultLayout>
+    // </BrowserRouter>
   );
 }
 
