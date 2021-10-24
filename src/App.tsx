@@ -18,6 +18,8 @@ import {SecondaryButton} from '../src/components/atoms/button/SecondaryButton'
 import {SearchInput} from '../src/components/molecules/SearchInput'
 import {UserCard} from '../src/components/organisms/user/UserCard'
 import { DefaultLayout} from './components/templates/DefaultLayout'
+import { UserProvider } from './providers/UserProvider';
+import { RecoilRoot } from 'recoil';
 
 
 function App() {
@@ -82,6 +84,8 @@ const user ={
   return (
 //        <BrowserRouter>
 // <DefaultLayout>
+<RecoilRoot>
+<UserProvider>
 
       <header className="App-header">
         {/* <SearchInput />
@@ -135,8 +139,10 @@ const user ={
   <ChildArea  open={open} onClickClose={onClickClose} /> */}
   {/* <UrlParameter /> */}
       </header>
-// </DefaultLayout>
-    // </BrowserRouter>
+ {/* </DefaultLayout>
+</BrowserRouter>*/}
+    </UserProvider>
+    </RecoilRoot>
   );
 }
 

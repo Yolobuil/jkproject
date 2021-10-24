@@ -2,7 +2,9 @@ import styled from "styled-components"
 import { SearchInput } from "../molecules/SearchInput"
 import { UserCard } from "../organisms/user/UserCard"
 import { useLocation } from "react-router-dom"
-
+import { useRecoilState, useSetRecoilState } from 'recoil';
+import { userState } from "../../store/userState";
+import { SecondaryButton } from "../atoms/button/SecondaryButton";
 
 const users = [...Array(10).keys()].map(( val) => {
 return {
@@ -20,19 +22,25 @@ return {
 })
 
 
-
 export const Users = () =>{
 
 const {state} = useLocation();
-const isAdmin = state ? state : false;
+// const isAdmin = state ? state : false;
+const [userInfo,setUserInfo] = useRecoilState(userState);
+
+const onClickSwitch = () =>{
+  setUserInfo({isAdmin: !userInfo.isAdmin})
+}
+
 
   return(
     <SContainer>
       <h2>ユーザ一覧</h2>
       <SearchInput />
+      <SecondaryButton onClick={onClickSwitch}>切り替え</SecondaryButton>
       <SUserArea>
       {users.map((user) =>
-        <UserCard  isAdmin={isAdmin} keys={user.id} user={user}/>
+        <UserCard  keys={user.id} user={user}/>
       )}
       </SUserArea>
     </SContainer>

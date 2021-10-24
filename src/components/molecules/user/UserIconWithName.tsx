@@ -1,15 +1,19 @@
+import { useRecoilValue } from 'recoil';
 import styled from 'styled-components'
+import { userState } from '../../../store/userState';
 
 export const UserIconWithName = (props:any) =>{
 
-const{ name , image,isAdmin} = props;
-
+const{ name , image} = props;
+// 値を参照するだけですよというもの（useRecoilValue） 値を更新する場合はuseRecoilState
+const userInfo = useRecoilValue(userState);
+const isAdmin = userInfo ? userInfo.isAdmin : false;
 
 return(
 <SContainer>
   <SImg height={160} width={160}src={image} alt={name}/>
 <SName>{name}</SName>
-{isAdmin && isAdmin !== false && (<SEdit>編集</SEdit>) }
+{isAdmin && (<SEdit>編集</SEdit>) }
 </SContainer>
 
 )

@@ -1,9 +1,13 @@
+// useHistoryというhookをimport
 import {Link,useHistory}  from 'react-router-dom';
 
 export const Page1 = () => {
   const arr = [...Array(100).keys()];
 
+  // 変数に展開する
   const history = useHistory();
+
+  // pushメソッドに遷移先のルートを記述することでJSで遷移できる
   const onClickDetailA = () => history.push('/page1/detailA')
 
   return(
