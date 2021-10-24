@@ -167,3 +167,29 @@ axiosの場合はresultのdataの中にAPIによって取得したデータが�
 
 バックエンドでわざわざサーバ立ててデータを用意しなくても、データの取得は試せる。
 ->axios + jsonplaceholder
+
+●TypeScript
+・TypeScriptとは
+1.MSが開発したOSSの言語
+2.JSに型という概念が付属された
+3.より安全にバグが少なく開発できる
+4.開発者間で認識を合わせやすい
+5.エディタでコード補完も聞くため、タイピングしなくて良くなり、開発効率が高くなる
+6.コンポーネント指向のReactと非常に相性が良い
+→コンポーネントに渡すpropsを型定義することで、わかりやすくリファクタリングや機能追加ができる。
+型定義しないと暗黙的に型変換を行われてしまうため、しっかりとしないとエラーが出る可能性がある。
+
+tsconfig.json
+→TypeScript関連の設定ファイル
+strict
+→厳しいルールをまとめて設定してくれてる設定ファイル。
+→基本的にはtrueにしておく。
+→trueの中には暗黙的なanyを許さない設定になっている（明示すればOK）
+※既存のJSをTS化していく場合は一旦falseにしておく。
+noImplicitAnyをfalseにすると、暗黙anyも許容される。
+PJに合わせてオンオフを合わせる。（tsconfig設定などで検索すると良い◎）
+
+ローカルでの開発環境の作り方(React,TypeScript)
+npx create-react-app PJname --template typescript
+
+dispatchは更新関数のこと

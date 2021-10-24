@@ -5,7 +5,7 @@ import { CssModules } from './components/CssModules';
 import { InlineStyle } from './components/InlineStyle';
 import { StyledJsx } from './components/StyledJsx';
 import { StyledComponents } from './components/StyledComponents';
-import { Emotion } from './components/Emotion'
+
 import { Home } from './Home'
 import { Page1} from './Page1'
 import { Page2 } from './Page2'
@@ -21,6 +21,11 @@ import { DefaultLayout} from './components/templates/DefaultLayout'
 import { UserProvider } from './providers/UserProvider';
 import { RecoilRoot } from 'recoil';
 import axios from 'axios';
+import { Practice1 } from './practices/Practice1';
+import { Practice2 } from './practices/Proctice2';
+import { Practice3 } from './practices/Practice3';
+import { Practice4 } from './practices/Practice4';
+import { Todo } from './Todo';
 
 
 function App() {
@@ -91,11 +96,24 @@ const onClickUsers = () => {
  .catch((e) => console.log(e));
 }
 
+
+
 const onClickUser1 = () => {
  // axiosの後に使用したいメソッドを定義（今回はjsonplaceholderからデータを取得）
  axios.get("https://jsonplaceholder.typicode.com/users?id=1")
  // thenで正常系
  .then((result) => console.log(result.data))
+ // catchで異常系
+ .catch((e) => console.log(e));
+}
+
+const [todos,setTodos] = useState<any>([]);
+
+const onClickTodos = () => {
+ // axiosの後に使用したいメソッドを定義（今回はjsonplaceholderからデータを取得）
+ axios.get("https://jsonplaceholder.typicode.com/todos")
+ // thenで正常系
+ .then((result) => setTodos(result.data))
  // catchで異常系
  .catch((e) => console.log(e));
 }
@@ -107,6 +125,7 @@ const onClickUser1 = () => {
 <UserProvider>
 
       <header className="App-header">
+
         {/* <SearchInput />
         <UserCard user={user}/>
         <PrimaryButton children='Primary'></PrimaryButton>
@@ -114,8 +133,16 @@ const onClickUser1 = () => {
         <SecondaryButton children='secondary'></SecondaryButton> */}
         {/* react-routerのルーティング機能を機能させる */}
 <Router />
+
 <button onClick={onClickUsers}>users</button>
+<Practice1></Practice1>
+<Practice2/>
+<Practice3 />
+<Practice4 />
+<button onClick={onClickTodos}>Todo</button>
+{todos.map((todo) => <Todo title={todo.title} userId={todo.userId}/> )}
 <button onClick={onClickUser1}> id = 1</button>
+
         {/* <Link to="/">Home</Link>
         <br/>
         <Link to="/page1">Page1</Link>
