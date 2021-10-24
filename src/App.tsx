@@ -20,6 +20,7 @@ import {UserCard} from '../src/components/organisms/user/UserCard'
 import { DefaultLayout} from './components/templates/DefaultLayout'
 import { UserProvider } from './providers/UserProvider';
 import { RecoilRoot } from 'recoil';
+import axios from 'axios';
 
 
 function App() {
@@ -81,6 +82,24 @@ const user ={
   website: "https:///google.com"
 }
 
+const onClickUsers = () => {
+  // axiosの後に使用したいメソッドを定義（今回はjsonplaceholderからデータを取得）
+ axios.get("https://jsonplaceholder.typicode.com/users")
+ // thenで正常系
+ .then((result) => console.log(result.data))
+ // catchで異常系
+ .catch((e) => console.log(e));
+}
+
+const onClickUser1 = () => {
+ // axiosの後に使用したいメソッドを定義（今回はjsonplaceholderからデータを取得）
+ axios.get("https://jsonplaceholder.typicode.com/users?id=1")
+ // thenで正常系
+ .then((result) => console.log(result.data))
+ // catchで異常系
+ .catch((e) => console.log(e));
+}
+
   return (
 //        <BrowserRouter>
 // <DefaultLayout>
@@ -95,6 +114,8 @@ const user ={
         <SecondaryButton children='secondary'></SecondaryButton> */}
         {/* react-routerのルーティング機能を機能させる */}
 <Router />
+<button onClick={onClickUsers}>users</button>
+<button onClick={onClickUser1}> id = 1</button>
         {/* <Link to="/">Home</Link>
         <br/>
         <Link to="/page1">Page1</Link>
