@@ -1,6 +1,6 @@
 export const Practice4 = () =>{
 
-  const calcTotalFee = (num:number) => {
+  const calcTotalFee = (num) => {
     const total = num * 1.1;
     console.log(total)
   }
@@ -11,7 +11,7 @@ calcTotalFee(1000);
 
   return(
     <div>
-      <p>練習問題4:引数の方指定</p>
+      <p>練習問題4:設定ファイルを触ってみる</p>
       <button onClick={onClickPractice}>練習問題4を実行</button>
     </div>
   )

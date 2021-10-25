@@ -193,3 +193,20 @@ PJに合わせてオンオフを合わせる。（tsconfig設定などで検索�
 npx create-react-app PJname --template typescript
 
 dispatchは更新関数のこと
+
+type 大文字頭文字
+→中身に型付ができる
+
+型定義のテクニック
+●Pick
+Pick<T(型名),'プロパティ名'>
+で型名の中のプロパティを使うという方法ができる
+
+●Omit
+Omit<T(型名),'プロパティ名'>
+型の中にあるプロパティの要素を除く
+
+●React.FC
+関数コンポーネントの略
+const 関数名:React.FC<props型名>という利用の仕方
+FCという型は暗黙的にchildrenを受け取れるようになっている。(含まれているイメージ)

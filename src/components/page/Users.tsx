@@ -6,7 +6,7 @@ import { useRecoilState, useSetRecoilState } from 'recoil';
 import { userState } from "../../store/userState";
 import { SecondaryButton } from "../atoms/button/SecondaryButton";
 
-const users = [...Array(10).keys()].map(( val) => {
+const users = [...Array(12).keys()].map(( val) => {
 return {
   id: val,
    name: `yolo`,

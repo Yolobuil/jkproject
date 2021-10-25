@@ -26,7 +26,8 @@ import { Practice2 } from './practices/Proctice2';
 import { Practice3 } from './practices/Practice3';
 import { Practice4 } from './practices/Practice4';
 import { Todo } from './Todo';
-
+import {TodoType} from './types/todo'
+import {Text} from './Text'
 
 function App() {
    const [count,setCount] = useState(0);
@@ -107,16 +108,22 @@ const onClickUser1 = () => {
  .catch((e) => console.log(e));
 }
 
-const [todos,setTodos] = useState<any>([]);
+
+
+// TodoType型配列のstate
+const [todos,setTodos] = useState<TodoType[]>([]);
 
 const onClickTodos = () => {
  // axiosの後に使用したいメソッドを定義（今回はjsonplaceholderからデータを取得）
- axios.get("https://jsonplaceholder.typicode.com/todos")
+ // Array（配列)のTodoType型になる
+ axios.get<Array<TodoType>>("https://jsonplaceholder.typicode.com/todos")
  // thenで正常系
  .then((result) => setTodos(result.data))
  // catchで異常系
  .catch((e) => console.log(e));
 }
+
+
 
   return (
 //        <BrowserRouter>
@@ -135,12 +142,14 @@ const onClickTodos = () => {
 <Router />
 
 <button onClick={onClickUsers}>users</button>
+<Text color='red' fontSize='20px' />
 <Practice1></Practice1>
 <Practice2/>
 <Practice3 />
 <Practice4 />
 <button onClick={onClickTodos}>Todo</button>
-{todos.map((todo) => <Todo title={todo.title} userId={todo.userId}/> )}
+{/* mapの中にはkeyが必要 */}
+{todos.map((todo) => <Todo key={todo.id} title={todo.title} userId={todo.userId} completed={todo.completed}/> )}
 <button onClick={onClickUser1}> id = 1</button>
 
         {/* <Link to="/">Home</Link>
