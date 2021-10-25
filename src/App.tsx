@@ -28,6 +28,8 @@ import { Practice4 } from './practices/Practice4';
 import { Todo } from './Todo';
 import {TodoType} from './types/todo'
 import {Text} from './Text'
+import { UserProfile } from './userProfile';
+import { User } from './types/user'
 
 function App() {
    const [count,setCount] = useState(0);
@@ -123,6 +125,10 @@ const onClickTodos = () => {
  .catch((e) => console.log(e));
 }
 
+const userInfo:User ={
+  name: 'yolo',
+  hobbies: ['movie' , 'game'],
+}
 
 
   return (
@@ -142,6 +148,7 @@ const onClickTodos = () => {
 <Router />
 
 <button onClick={onClickUsers}>users</button>
+<UserProfile user={userInfo}/>
 <Text color='red' fontSize='20px' />
 <Practice1></Practice1>
 <Practice2/>
