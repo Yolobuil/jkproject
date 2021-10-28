@@ -16,7 +16,7 @@ import { Router } from './router/Router'
 import {PrimaryButton} from '../src/components/atoms/button/PrimaryButton'
 import {SecondaryButton} from '../src/components/atoms/button/SecondaryButton'
 import {SearchInput} from '../src/components/molecules/SearchInput'
-import {UserCard} from '../src/components/organisms/user/UserCard'
+import {UserCard} from '../src/components/UserCard'
 import { DefaultLayout} from './components/templates/DefaultLayout'
 import { UserProvider } from './providers/UserProvider';
 import { RecoilRoot } from 'recoil';
@@ -30,6 +30,8 @@ import {TodoType} from './types/todo'
 import {Text} from './Text'
 import { UserProfile } from './userProfile';
 import { User } from './types/user'
+import { UserFetch } from './types/api/user'
+import { UserProfileType } from './types/userProfile';
 
 function App() {
    const [count,setCount] = useState(0);
@@ -79,15 +81,24 @@ return {
 
 })
 
+// const user ={
+//   name: 'yolo',
+//   image: 'https://source.unsplash.com/yihlaRCCvd4',
+//   email: 'aaa.co.jp',
+//   phone:"090-1111-2222",
+//   company:{
+//     name: 'test株式会社'
+//   },
+//   website: "https:///google.com"
+// }
+
 const user ={
+  id:1,
   name: 'yolo',
-  image: 'https://source.unsplash.com/yihlaRCCvd4',
   email: 'aaa.co.jp',
-  phone:"090-1111-2222",
-  company:{
-    name: 'test株式会社'
-  },
-  website: "https:///google.com"
+  address: 'sss',
+
+
 }
 
 const onClickUsers = () => {
@@ -110,6 +121,29 @@ const onClickUser1 = () => {
  .catch((e) => console.log(e));
 }
 
+const [ userProfiles,setUserProfiles] = useState<UserProfileType[]>([]);
+const [isLoading,setIsLoading] = useState<boolean>(false);
+const [ error,setError] = useState<boolean>(false);
+
+const onClickFetchUser = () =>{
+  setIsLoading(true);
+  setError(false);
+   axios.get<Array<UserFetch>>("https://jsonplaceholder.typicode.com/users").then((res) => {
+    const data = res.data.map((user) => ({
+id: user.id,
+name: `${user.name}(${user.username})`,
+email: user.email,
+address: `${user.address.city}${user.address.suite}${user.address.street}`
+    }));
+  setUserProfiles(data);
+  // finallyとはthenであってもcatchであっても何があっても必ず実行される場所
+  }).catch(() => {
+    setError(true);})
+    .finally(() => {
+    setIsLoading(false);
+  }
+  );
+}
 
 
 // TodoType型配列のstate
@@ -148,12 +182,27 @@ const userInfo:User ={
 <Router />
 
 <button onClick={onClickUsers}>users</button>
+
 <UserProfile user={userInfo}/>
 <Text color='red' fontSize='20px' />
 <Practice1></Practice1>
 <Practice2/>
 <Practice3 />
 <Practice4 />
+<button onClick={onClickFetchUser}>データ取得</button>
+<br />
+{error ? (
+<p　style={{color:'red'}}>データの取得に失敗しました</p>
+
+) : isLoading ? (
+  <p>Loading...</p>
+) : (
+  <>
+  {userProfiles.map((user) => <UserCard key={user.id} user={user}/>)}
+  </>
+)}
+
+
 <button onClick={onClickTodos}>Todo</button>
 {/* mapの中にはkeyが必要 */}
 {todos.map((todo) => <Todo key={todo.id} title={todo.title} userId={todo.userId} completed={todo.completed}/> )}
