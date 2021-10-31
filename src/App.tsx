@@ -32,57 +32,52 @@ import { UserProfile } from './userProfile';
 import { User } from './types/user'
 import { UserFetch } from './types/api/user'
 import { UserProfileType } from './types/userProfile';
+import { useAllUsers} from '../src/hooks/useAllUsers';
+import { Button, ChakraProvider } from '@chakra-ui/react';
+
+import theme from '../src/theme/theme'
+import { ChakraRouter } from './router/ChakraRouter';
+
 
 function App() {
-   const [count,setCount] = useState(0);
-   const [text,setText] = useState('');
-   const [open , setOpen] = useState(false);
+//    const [count,setCount] = useState(0);
+//    const [text,setText] = useState('');
+//    const [open , setOpen] = useState(false);
 
-const onClickCountUp = () =>{
-  // stateの値が更新されることで、際レンダリングされる（差分のみ更新）
-  // コンポーネントの値が変わった時に際レンダリングー＞差分を検知して変更を画面に反映する
-setCount(count +1);
+// const onClickCountUp = () =>{
+//   // stateの値が更新されることで、際レンダリングされる（差分のみ更新）
+//   // コンポーネントの値が変わった時に際レンダリングー＞差分を検知して変更を画面に反映する
+// setCount(count +1);
 
-}
+// }
 
-
-
-const onClickOpen = () =>{
-setOpen(!open);
-}
-
-const onChangeText = (e: any) => {
-  setText(e.target.value);
-}
+// const { getUsers,userProfiles,isLoading,error
+//  } = useAllUsers();
 
 
-//　再レンダリングされたら上からアロー関数が再生成される
-const onClickClose = useCallback(() => {
-  setOpen(false);
-}, []);
+// const onClickOpen = () =>{
+// setOpen(!open);
+// }
 
-// 計算は最初に読み込まれた時にだけ行われて、あとはずっと４のまま使いまわされる（使う機会はあまりない）
-// 処理の中に変数があれば、[]のなかにそれを設定し、その変数が変わった時だけ再計算するというやり方で工夫できる
-const tmp = useMemo(()=> 1+ 3, []);
-console.log(tmp)
+// const onChangeText = (e: any) => {
+//   setText(e.target.value);
+// }
 
-const users = [...Array(10).keys()].map(( val) => {
-return {
-  id: val,
-   name: `yolo${val}`,
-  image: 'https://source.unsplash.com/yihlaRCCvd4',
-  email: 'aaa.co.jp',
-  phone:"090-1111-2222",
-  company:{
-    name: 'test株式会社'
-  },
-  website: "https:///google.com"
-}
 
-})
+// //　再レンダリングされたら上からアロー関数が再生成される
+// const onClickClose = useCallback(() => {
+//   setOpen(false);
+// }, []);
 
-// const user ={
-//   name: 'yolo',
+// // 計算は最初に読み込まれた時にだけ行われて、あとはずっと４のまま使いまわされる（使う機会はあまりない）
+// // 処理の中に変数があれば、[]のなかにそれを設定し、その変数が変わった時だけ再計算するというやり方で工夫できる
+// const tmp = useMemo(()=> 1+ 3, []);
+// console.log(tmp)
+
+// const users = [...Array(10).keys()].map(( val) => {
+// return {
+//   id: val,
+//    name: `yolo${val}`,
 //   image: 'https://source.unsplash.com/yihlaRCCvd4',
 //   email: 'aaa.co.jp',
 //   phone:"090-1111-2222",
@@ -92,170 +87,190 @@ return {
 //   website: "https:///google.com"
 // }
 
-const user ={
-  id:1,
-  name: 'yolo',
-  email: 'aaa.co.jp',
-  address: 'sss',
+// })
+
+// // const user ={
+// //   name: 'yolo',
+// //   image: 'https://source.unsplash.com/yihlaRCCvd4',
+// //   email: 'aaa.co.jp',
+// //   phone:"090-1111-2222",
+// //   company:{
+// //     name: 'test株式会社'
+// //   },
+// //   website: "https:///google.com"
+// // }
+
+// const user ={
+//   id:1,
+//   name: 'yolo',
+//   email: 'aaa.co.jp',
+//   address: 'sss',
 
 
-}
+// }
 
-const onClickUsers = () => {
-  // axiosの後に使用したいメソッドを定義（今回はjsonplaceholderからデータを取得）
- axios.get("https://jsonplaceholder.typicode.com/users")
- // thenで正常系
- .then((result) => console.log(result.data))
- // catchで異常系
- .catch((e) => console.log(e));
-}
-
-
-
-const onClickUser1 = () => {
- // axiosの後に使用したいメソッドを定義（今回はjsonplaceholderからデータを取得）
- axios.get("https://jsonplaceholder.typicode.com/users?id=1")
- // thenで正常系
- .then((result) => console.log(result.data))
- // catchで異常系
- .catch((e) => console.log(e));
-}
-
-const [ userProfiles,setUserProfiles] = useState<UserProfileType[]>([]);
-const [isLoading,setIsLoading] = useState<boolean>(false);
-const [ error,setError] = useState<boolean>(false);
-
-const onClickFetchUser = () =>{
-  setIsLoading(true);
-  setError(false);
-   axios.get<Array<UserFetch>>("https://jsonplaceholder.typicode.com/users").then((res) => {
-    const data = res.data.map((user) => ({
-id: user.id,
-name: `${user.name}(${user.username})`,
-email: user.email,
-address: `${user.address.city}${user.address.suite}${user.address.street}`
-    }));
-  setUserProfiles(data);
-  // finallyとはthenであってもcatchであっても何があっても必ず実行される場所
-  }).catch(() => {
-    setError(true);})
-    .finally(() => {
-    setIsLoading(false);
-  }
-  );
-}
+// const onClickUsers = () => {
+//   // axiosの後に使用したいメソッドを定義（今回はjsonplaceholderからデータを取得）
+//  axios.get("https://jsonplaceholder.typicode.com/users")
+//  // thenで正常系
+//  .then((result) => console.log(result.data))
+//  // catchで異常系
+//  .catch((e) => console.log(e));
+// }
 
 
-// TodoType型配列のstate
-const [todos,setTodos] = useState<TodoType[]>([]);
 
-const onClickTodos = () => {
- // axiosの後に使用したいメソッドを定義（今回はjsonplaceholderからデータを取得）
- // Array（配列)のTodoType型になる
- axios.get<Array<TodoType>>("https://jsonplaceholder.typicode.com/todos")
- // thenで正常系
- .then((result) => setTodos(result.data))
- // catchで異常系
- .catch((e) => console.log(e));
-}
+// const onClickUser1 = () => {
+//  // axiosの後に使用したいメソッドを定義（今回はjsonplaceholderからデータを取得）
+//  axios.get("https://jsonplaceholder.typicode.com/users?id=1")
+//  // thenで正常系
+//  .then((result) => console.log(result.data))
+//  // catchで異常系
+//  .catch((e) => console.log(e));
+// }
 
-const userInfo:User ={
-  name: 'yolo',
-  hobbies: ['movie' , 'game'],
-}
+// // const [ userProfiles,setUserProfiles] = useState<UserProfileType[]>([]);
+// // const [isLoading,setIsLoading] = useState<boolean>(false);
+// // const [ error,setError] = useState<boolean>(false);
+
+// // const onClickFetchUser = () =>{
+// //   setIsLoading(true);
+// //   setError(false);
+// //    axios.get<Array<UserFetch>>("https://jsonplaceholder.typicode.com/users").then((res) => {
+// //     const data = res.data.map((user) => ({
+// // id: user.id,
+// // name: `${user.name}(${user.username})`,
+// // email: user.email,
+// // address: `${user.address.city}${user.address.suite}${user.address.street}`
+// //     }));
+// //   setUserProfiles(data);
+// //   // finallyとはthenであってもcatchであっても何があっても必ず実行される場所
+// //   }).catch(() => {
+// //     setError(true);})
+// //     .finally(() => {
+// //     setIsLoading(false);
+// //   }
+// //   );
+// // }
+
+
+// // TodoType型配列のstate
+// const [todos,setTodos] = useState<TodoType[]>([]);
+
+// const onClickTodos = () => {
+//  // axiosの後に使用したいメソッドを定義（今回はjsonplaceholderからデータを取得）
+//  // Array（配列)のTodoType型になる
+//  axios.get<Array<TodoType>>("https://jsonplaceholder.typicode.com/todos")
+//  // thenで正常系
+//  .then((result) => setTodos(result.data))
+//  // catchで異常系
+//  .catch((e) => console.log(e));
+// }
+
+// const userInfo:User ={
+//   name: 'yolo',
+//   hobbies: ['movie' , 'game'],
+// }
 
 
   return (
-//        <BrowserRouter>
-// <DefaultLayout>
-<RecoilRoot>
-<UserProvider>
 
-      <header className="App-header">
+    <ChakraProvider theme={theme}>
+<BrowserRouter>
+<ChakraRouter />
 
-        {/* <SearchInput />
-        <UserCard user={user}/>
-        <PrimaryButton children='Primary'></PrimaryButton>
-        <PrimaryButton children='test'></PrimaryButton>
-        <SecondaryButton children='secondary'></SecondaryButton> */}
-        {/* react-routerのルーティング機能を機能させる */}
-<Router />
+</BrowserRouter>
+      </ChakraProvider>
+// //        <BrowserRouter>
+// // <DefaultLayout>
+// <RecoilRoot>
+// <UserProvider>
 
-<button onClick={onClickUsers}>users</button>
+//       <header className="App-header">
 
-<UserProfile user={userInfo}/>
-<Text color='red' fontSize='20px' />
-<Practice1></Practice1>
-<Practice2/>
-<Practice3 />
-<Practice4 />
-<button onClick={onClickFetchUser}>データ取得</button>
-<br />
-{error ? (
-<p　style={{color:'red'}}>データの取得に失敗しました</p>
+//         {/* <SearchInput />
+//         <UserCard user={user}/>
+//         <PrimaryButton children='Primary'></PrimaryButton>
+//         <PrimaryButton children='test'></PrimaryButton>
+//         <SecondaryButton children='secondary'></SecondaryButton> */}
+//         {/* react-routerのルーティング機能を機能させる */}
+// <Router />
 
-) : isLoading ? (
-  <p>Loading...</p>
-) : (
-  <>
-  {userProfiles.map((user) => <UserCard key={user.id} user={user}/>)}
-  </>
-)}
+// <button onClick={onClickUsers}>users</button>
+
+// <UserProfile user={userInfo}/>
+// <Text color='red' fontSize='20px' />
+// <Practice1></Practice1>
+// <Practice2/>
+// <Practice3 />
+// <Practice4 />
+// <button onClick={getUsers}>データ取得</button>
+// <br />
+// {error ? (
+// <p　style={{color:'red'}}>データの取得に失敗しました</p>
+
+// ) : isLoading ? (
+//   <p>Loading...</p>
+// ) : (
+//   <>
+//   {userProfiles.map((user) => <UserCard key={user.id} user={user}/>)}
+//   </>
+// )}
 
 
-<button onClick={onClickTodos}>Todo</button>
-{/* mapの中にはkeyが必要 */}
-{todos.map((todo) => <Todo key={todo.id} title={todo.title} userId={todo.userId} completed={todo.completed}/> )}
-<button onClick={onClickUser1}> id = 1</button>
+// <button onClick={onClickTodos}>Todo</button>
+// {/* mapの中にはkeyが必要 */}
+// {todos.map((todo) => <Todo key={todo.id} title={todo.title} userId={todo.userId} completed={todo.completed}/> )}
+// <button onClick={onClickUser1}> id = 1</button>
 
-        {/* <Link to="/">Home</Link>
-        <br/>
-        <Link to="/page1">Page1</Link>
-        <br/>
-        <Link to="/page2">Page2</Link>
+//         {/* <Link to="/">Home</Link>
+//         <br/>
+//         <Link to="/page1">Page1</Link>
+//         <br/>
+//         <Link to="/page2">Page2</Link>
 
-         <Switch>
+//          <Switch>
 
-<Route exact path='/'><Home /></Route>
-<Route path='/page1' render={({ match : {url}}) => (
+// <Route exact path='/'><Home /></Route>
+// <Route path='/page1' render={({ match : {url}}) => (
 
-  <Switch>
-    <Route exact path={url}>
-  <Page1 />
-  </Route>
-      <Route path={`${url}/detailA`}>
-  <Page1DetailA />
-  </Route>
-  <Route path={`${url}/detailB`}>
-    <Page1DetailB />
-  </Route>
-  </Switch>
+//   <Switch>
+//     <Route exact path={url}>
+//   <Page1 />
+//   </Route>
+//       <Route path={`${url}/detailA`}>
+//   <Page1DetailA />
+//   </Route>
+//   <Route path={`${url}/detailB`}>
+//     <Page1DetailB />
+//   </Route>
+//   </Switch>
 
-)}/>
-<Route path='/page2'> <Page2 /></Route>
-         </Switch>
+// )}/>
+// <Route path='/page2'> <Page2 /></Route>
+//          </Switch>
 
-        <InlineStyle />
-        <CssModules />
-        <StyledJsx />
-        <StyledComponents />
-        <Emotion /> */}
-  {/* <p> {count}</p>
-  <button onClick={onClickCountUp}>UP</button>
-  inputで子要素が再レンダリングされるのは、Reactの特徴
-  <input  value={text} onChange={onChangeText}/>
-  {text}
-  <br />
-  <br />
-  <button onClick={onClickOpen}> 表示</button>
+//         <InlineStyle />
+//         <CssModules />
+//         <StyledJsx />
+//         <StyledComponents />
+//         <Emotion /> */}
+//   {/* <p> {count}</p>
+//   <button onClick={onClickCountUp}>UP</button>
+//   inputで子要素が再レンダリングされるのは、Reactの特徴
+//   <input  value={text} onChange={onChangeText}/>
+//   {text}
+//   <br />
+//   <br />
+//   <button onClick={onClickOpen}> 表示</button>
 
-  <ChildArea  open={open} onClickClose={onClickClose} /> */}
-  {/* <UrlParameter /> */}
-      </header>
- {/* </DefaultLayout>
-</BrowserRouter>*/}
-    </UserProvider>
-    </RecoilRoot>
+//   <ChildArea  open={open} onClickClose={onClickClose} /> */}
+//   {/* <UrlParameter /> */}
+//       </header>
+//  {/* </DefaultLayout>
+// </BrowserRouter>*/}
+//     </UserProvider>
+//     </RecoilRoot>
   );
 }
 

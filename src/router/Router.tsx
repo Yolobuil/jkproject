@@ -4,7 +4,7 @@ import { Home } from './../Home'
 
 import { page1Routes } from './Page1Routes';
 import { page2Routes } from './Page2Routes';
-import { Page404 } from './../Page404'
+import { Page404 } from '../components/page/Page404'
 import { Top } from '../components/page/Top';
 import { Users } from '../components/page/Users';
 import { DefaultLayout } from '../components/templates/DefaultLayout';
