@@ -255,3 +255,14 @@ CSSの適応はあまり強くないが、コンポーネントが便利。
 使用するときはChakrProviderで囲う必要がある。
 囲ったなかで使用ができるようになる。
 
+  // ...でオブジェクトを展開後にisAdminを追加しているイメージ。
+  // { ...A , B}
+    { ...res.data, isAdmin}
+
+
+   // &で型を追加することで、A＆Bの新しい型が出来上がる。
+      UserFetch & {isAdmin :boolean}
+
+
+   // TypeScriptのasはこの型ですよとTypeScriptに強制的に認識させられる。
+      {} as LoginUserContextType

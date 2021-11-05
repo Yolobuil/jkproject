@@ -3,6 +3,7 @@ import { Route, Switch } from 'react-router-dom'
 import { Login } from '../components/page/Login'
 import { Page404 } from '../components/page/Page404'
 import { HeaderLayout } from '../components/templates/HeaderLayout'
+import { LoginUserProvider } from '../providers/LoginUserProvider'
 import { homeRoutes } from './HomeRouters'
 
 export const ChakraRouter:React.FC = memo(() => {
@@ -10,6 +11,7 @@ export const ChakraRouter:React.FC = memo(() => {
 return (
 
   <Switch>
+    <LoginUserProvider>
     <Route exact path='/'>
       <Login />
     </Route>
@@ -22,6 +24,7 @@ return (
          )}
        </Switch>
      )} />
+         </LoginUserProvider>
         <Route path='*'>
       <Page404 />
     </Route>
